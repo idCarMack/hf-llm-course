@@ -31,7 +31,7 @@ raw_inputs = [
     "I hate this so much!",
 ]
 inputs = tokenizer(raw_inputs, padding=True, truncation=True, return_tensors="pt")
-print(f"\n\nTokenizer...............................:\n {inputs}")
+print(f"\n\nTokenizer...............................:\n {inputs}")    # print: [{'label': 'POSITIVE', 'score': 0.9598049521446228}, {'label': 'NEGATIVE', 'score': 0.9994558691978455}]
 
 
 # 2. Model inference
