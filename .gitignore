@@ -63,6 +63,9 @@ db.sqlite3-journal
 
 # Flask stuff:
 instance/
+
+test-trainer-evaluation/
+test-trainer/
 .webassets-cache
 
 # Scrapy stuff:

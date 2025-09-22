@@ -1,3 +1,4 @@
+from random import sample
 from datasets import load_dataset
 
 raw_datasets = load_dataset("glue", "mrpc")
@@ -48,3 +49,23 @@ def tokenize_function(example):
 
 tokenized_datasets = raw_datasets.map(tokenize_function, batched=True)
 print(tokenized_datasets)
+
+from transformers import DataCollatorWithPadding
+data_collator = DataCollatorWithPadding(tokenizer=tokenizer)
+
+samples = tokenized_datasets["train"][:8]
+samples = {k: v for k, v in samples.items() if k not in ["idx", "sentence1", "sentence2"]}
+[len(x) for x in samples["input_ids"]]  # [50, 59, 47, 67, 59, 50, 62, 32]
+
+batch = data_collator(samples)
+'''
+{
+    'attention_mask': torch.Size([8, 67]),
+    'input_ids': torch.Size([8, 67]),
+    'token_type_ids': torch.Size([8, 67]),
+    'labels': torch.Size([8])
+}
+'''
+print({k: v.shape for k, v in batch.items()})
+
+
